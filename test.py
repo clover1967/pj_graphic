@@ -28,18 +28,29 @@ def fft(filename):
     windowsize = 5000
     time = [n for n in range(windowsize)]
     plt.figure(figsize=(20, 10), dpi=80)
+    
+    
     plt.ion()
-    for i in range(0, length, windowsize):
+    for i in range(0, length, int(windowsize / 10)):
+        plt.cla()
+        plt.subplot(1, 2, 1)
         plt.cla()
         inf = min(i + windowsize, length)
-        c = np.fft.rfft(wavedata[0][i:inf]) / windowsize
-        freqs = np.linspace(0, framesrate / 2, windowsize / 2)
+        c = np.fft.rfft(wavedata[0][i:inf]) / (inf - i)
+        freqs = np.linspace(0, framesrate / 2, (inf - i) / 2)
         plt.grid(True)
         plt.xlabel('Freqrence/Hz')
         plt.xlim(0, framesrate / 2)
         plt.ylabel('Amp')
-        plt.ylim(0, 5000)
-        plt.plot(freqs, np.abs(c[1:]))
+        plt.ylim(0, 3000)
+        plt.plot(freqs, np.abs(c[:-1]))
+        plt.fill_between(freqs, 0, np.abs(c[:-1]))
+        plt.subplot(1, 2, 2)
+        plt.grid(True)
+        plt.xlabel('Time')
+        plt.ylabel('Amp')
+        plt.ylim(-30000, 30000)
+        plt.plot(time, wavedata[0][i:inf])
         plt.pause(0.001)
     plt.ioff()
     plt.show()
