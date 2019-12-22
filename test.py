@@ -28,8 +28,6 @@ def fft(filename):
     windowsize = 5000
     time = [n for n in range(windowsize)]
     plt.figure(figsize=(20, 10), dpi=80)
-    
-    
     plt.ion()
     for i in range(0, length, int(windowsize / 10)):
         plt.cla()
@@ -51,10 +49,10 @@ def fft(filename):
         plt.ylabel('Amp')
         plt.ylim(-30000, 30000)
         plt.plot(time, wavedata[0][i:inf])
+        #plt.fill_between(time, 0, wavedata[0][i:inf])
         plt.pause(0.001)
     plt.ioff()
     plt.show()
         
-
 if __name__ == '__main__':
     fft('clip.mp3')
