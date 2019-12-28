@@ -11,11 +11,11 @@ g_Width = 600           # 窗口宽度
 g_Height = 600          # 窗口高度
 
 g_nearPlane = 1.        # 观察点到近截面的距离
-g_farPlane = 1000.      # 观察点到远截面的距离
+g_farPlane = 100.      # 观察点到远截面的距离
 
 action = ""             # 记录鼠标和键盘的动作的字符串，被声明为全局变量
 xStart = yStart = 0.    # 运行过程中记录鼠标在窗口中的起始位置，以此将鼠标的动作转化成对图像的变换
-zoom = 65.              # 观察点相对y轴的角度，以度数计
+zoom = 45.              # 观察点相对y轴的角度，以度数计
 
 xRotate = 0.            # x轴方向上的旋转偏移量
 yRotate = 0.            # y轴方向上的旋转偏移量
@@ -56,16 +56,6 @@ def init():                             # 初始化光源、深度、阴影等
     glShadeModel(GL_SMOOTH)
     resetView()
 
-def resetView():                        # 该函数将视图重置为初始状态
-    global zoom, xRotate, yRotate, zRotate, xTrans, yTrans
-    zoom = 65.
-    xRotate = 0.
-    yRotate = 0.
-    zRotate = 0.
-    xTrans = 0.
-    yTrans = 0.
-    glutPostRedisplay()
-
 def display():
     # 清空颜色缓冲和深度缓冲
     glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT)
@@ -87,6 +77,16 @@ def reshape(width, height):             # 设置观察窗口的大小
     g_Width = width
     g_Height = height
     glViewport(0, 0, g_Width, g_Height)
+
+def resetView():                        # 该函数将视图重置为初始状态
+    global zoom, xRotate, yRotate, zRotate, xTrans, yTrans
+    zoom = 65.
+    xRotate = 0.
+    yRotate = 0.
+    zRotate = 0.
+    xTrans = 0.
+    yTrans = 0.
+    glutPostRedisplay()
 
 def polarView():                        # 应用平移、旋转的偏移量
     glTranslatef(yTrans / 100., 0.0, 0.0 )
