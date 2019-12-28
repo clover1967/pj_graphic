@@ -133,8 +133,8 @@ def motion(x, y):                       # 根据鼠标动作的类型和鼠标�
         zoom -= y - yStart
         if zoom > 150.:
             zoom = 150.
-        elif zoom < 1.1:
-            zoom = 1.1
+        elif zoom < 1.:
+            zoom = 1.
     else:
         print("unknown action\n", action)
     xStart = x
